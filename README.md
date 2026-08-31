@@ -31,7 +31,7 @@ FractureScan AI is a modern, web-based demo application that leverages Deep Lear
 
 ## 📂 Project Structure
 
-```text
+
 BoneFracture/
 ├── config/                     # Django project configuration
 │   ├── app/                    # Main Django application
@@ -45,10 +45,50 @@ BoneFracture/
 │   └── InceptionResNetV2A75L1.keras  # Pre-trained weights
 └── README.md                   # Project documentation
 
-## 🚀 Installation & Setup
+
+## Installation & Setup
 
 1. Prerequisites
 Ensure you have Python 3.8+ installed on your system.
 2. Clone the Repository / Navigate to Project
 Open your terminal and navigate to the root directory of the project (where the config folder and manage.py are located).
 3. Create a Virtual Environment (Recommended)
+4. Install Dependencies
+Install the required Python packages:
+
+pip install django tensorflow pillow numpy
+
+5. Place the Model File
+Ensure your trained Keras model file is placed in the correct directory. Based on the project structure, it should be located at:
+[Project Root]/models/InceptionResNetV2A75L1.keras
+Model available at: https://huggingface.co/SulaimanAhmed/BoneFractureDetector
+
+# Usage
+Open your web browser and navigate to: http://127.0.0.1:8000/
+Upload an X-Ray: Drag and drop an X-ray image (JPG, PNG, BMP) into the upload zone, or click to browse files.
+Analyze: Click the "Analyze X-Ray Scan" button.
+View Results: The UI will display a loading animation while the backend preprocesses the image (resizes to 299x299, normalizes) and runs it through the neural network.
+Interpretation: View the final diagnosis, model confidence percentage, and exact class probabilities.
+
+# Model Preprocessing Pipeline
+To ensure accurate predictions, the backend replicates the exact preprocessing steps used during model training:
+Color Space: Converts image to RGB.
+Resizing: Resizes the image to 299x299 pixels (required by InceptionResNetV2).
+Normalization: Converts pixel values to float32 and scales them to a range of [0, 1] by dividing by 255.0.
+Batching: Expands dimensions to (1, 299, 299, 3) for Keras prediction.
+Class Mapping:
+0: Not Fractured
+1: Fractured
+
+# Troubleshooting
+Issue: FileNotFoundError: Model not found...
+Solution: Django's BASE_DIR can sometimes resolve to unexpected paths depending on your folder structure.
+Open config/app/views.py.
+Locate the get_model() function.
+Update the model_path variable to the absolute path of your .keras file.
+Example: model_path = r"C:\Users\YourName\Desktop\Python\BoneFracture\models\InceptionResNetV2A75L1.keras"
+Issue: Frontend shows "Failed to connect to the server."
+Solution:
+Check your Django terminal for a --- PREDICTION ERROR --- traceback.
+Ensure you have accepted any browser prompts if running on a non-localhost network.
+Verify that the /predict/ endpoint is correctly mapped in config/app/urls.py.
