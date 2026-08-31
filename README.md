@@ -31,7 +31,7 @@ FractureScan AI is a modern, web-based demo application that leverages Deep Lear
 
 ## 📂 Project Structure
 
-
+``text 
 BoneFracture/
 ├── config/                     # Django project configuration
 │   ├── app/                    # Main Django application
