@@ -31,19 +31,7 @@ FractureScan AI is a modern, web-based demo application that leverages Deep Lear
 
 ## 📂 Project Structure
 
-``text 
-BoneFracture/
-├── config/                     # Django project configuration
-│   ├── app/                    # Main Django application
-│   │   ├── templates/
-│   │   │   └── home.html       # Frontend UI
-│   │   ├── views.py            # API endpoint & ML inference logic
-│   │   └── urls.py             # URL routing
-│   ├── settings.py             # Django settings
-│   └── manage.py               # Django CLI
-├── models/                     # Directory for ML models
-│   └── InceptionResNetV2A75L1.keras  # Pre-trained weights
-└── README.md                   # Project documentation
+<img width="482" height="298" alt="image" src="https://github.com/user-attachments/assets/a71ae171-c44e-42ff-b9ec-a677361f44bb" />
 
 
 ## Installation & Setup
